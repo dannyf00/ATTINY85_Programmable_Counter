@@ -8,7 +8,28 @@
 // Input on CLKi/PB3 pin
 // Output on OC0A/PB0 and OC0B/PB1, with an offset determined by Fin_OFFSET
 //
-// Output Frequency = Input frequency / Fin_PS / Fin_DIV
+// Output Frequency = Clock Input Frequency / Fin_PS / Fin_DIV
+//
+//Wiring
+//
+//
+//
+//                    ----------
+//                   |          |
+//                   |          |
+//                   |          |
+//  Clock Input ---> |CLKI/PB3  |
+//                   |          |
+//                   |          |
+//                   |          |
+//                   |  OC0A/PB0| -------> Output 1
+//                   |          |
+//                   |  OC0B/PB1| -------> Output 2, with an offset to Output 1
+//                   |          |
+//                   |          |
+//                   |       PB2| -------> Optional output
+//                   |          |
+//                    ----------
 //
 //
 //
@@ -18,10 +39,10 @@
 #include "tmr0.h"							//we use tmr0
 
 //hardware configuration
-#define Fin_DIV			250					//Input frequency divide ratio
+#define Fin_DIV			63					//Input frequency divide ratio
 #define Fin_OFFSET		10					//output offset between OC0A/OC0B. between 1..Fin_DIV
 #define Fin_PS			TMR0_PS1x			//Input frequency prescaler, _PS1x/_PS8x/_PS_64x/_PS_256x/_PS_1024x
-#define SYNC_OUT							//sync pin activated on PB2. PB2 is flipped on compare match -> at the same frequency at OCR0A/OCR0B
+//#define SYNC_OUT							//sync pin activated on PB2. PB2 is flipped on compare match -> at the same frequency at OCR0A/OCR0B
 //end hardware configuration
 
 //global defines
